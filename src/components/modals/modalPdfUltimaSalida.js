@@ -95,9 +95,10 @@ const Modal = ({ pesoNumEnv, setPdf, checkDespacho, checkEntrada, placa }) => {
       const buscarTrailer = await getTrailer(auth, response[0]?.No_R)
       console.log("buscarTrailer: ", buscarTrailer); 
       setTrailer(buscarTrailer[0])
-      const cargaF  =  parseInt(response[0]?.Bruto) - parseInt(response[0]?.Tara) - parseInt(buscarTrailer[0].Gross_Entrada) - parseInt(buscarTrailer[0].Peso_Trailer)
-      setCarga(cargaF)
-      setVgmD(cargaF + parseInt(buscarTrailer[0].Peso_Trailer))
+      // La carga y el VGM llegan calculados desde el backend
+      // (calculos/pesos.js); antes se recalculaban aqui y no se mostraban.
+      setCarga(response[0]?.Neto ?? null)
+      setVgmD(response[0]?.Vgm ?? null)
     }
   }else {
     const response = await getIngresosByPlacaApi(auth, placa);
@@ -109,10 +110,10 @@ const Modal = ({ pesoNumEnv, setPdf, checkDespacho, checkEntrada, placa }) => {
       console.log("buscarTrailer: ", buscarTrailer); 
       setTrailer(buscarTrailer[0])
 
-      const cargaF  =  parseInt(response[0]?.Bruto) - parseInt(response[0]?.Tara) - parseInt(buscarTrailer[0].Gross_Entrada) - parseInt(buscarTrailer[0].Peso_Trailer)
-      setCarga(cargaF)
-
-      setVgmD(cargaF + parseInt(buscarTrailer[0].Peso_Trailer))
+      // La carga y el VGM llegan calculados desde el backend
+      // (calculos/pesos.js); antes se recalculaban aqui y no se mostraban.
+      setCarga(response[0]?.Neto ?? null)
+      setVgmD(response[0]?.Vgm ?? null)
     }
   }
    
@@ -262,7 +263,7 @@ const Modal = ({ pesoNumEnv, setPdf, checkDespacho, checkEntrada, placa }) => {
                                                     PESO VGM:
                                                 </Text>
                                                 <Text style={{ fontSize: fontSize, maxWidth: maxWidth, fontWeight: fontWeight, marginLeft: "20.5%", letterSpacing: 1.5 }}>
-                                                    0
+                                                    {recibo?.Vgm ? recibo.Vgm : "0 "}
                                                 </Text>
                                                 <Text style={{ marginBottom: '0%', fontSize: fontSize, maxWidth: maxWidth, fontWeight: fontWeight, marginLeft: "29%", letterSpacing: letterSpacing }}>
                                                     KG

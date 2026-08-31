@@ -108,25 +108,12 @@ const Modal = ({ Estado, Recibo, Recibo2, Peso, Estado2, volumenEstado, unidadEs
 
 
                 
-                const cargaF2 = parseInt(buscarTrailer[0].Peso_Salida) - (parseInt(buscarTrailer[0].taraCab2) + parseInt(buscarTrailer[0].Peso_Trailer) + parseInt(buscarTrailer[0].Gross_Entrada))
-
-                // const cargaF  =  parseInt(response[0].Bruto) - parseInt(response[0].Tara)  - parseInt(buscarTrailer[0].Peso_Trailer)
-                setCarga(cargaF2)
-
-                setVgmD(cargaF2 + parseInt(buscarTrailer[0].Gross_Entrada))
-                if(parseInt(buscarTrailer[0].Peso_Entrada) > parseInt(buscarTrailer[0].Peso_Salida)){
-                  const netoV = parseInt(buscarTrailer[0].Peso_Entrada) - parseInt(buscarTrailer[0].Peso_Salida)- parseInt(buscarTrailer[0].Peso_Trailer)
-                  const vgm = netoV + parseInt(buscarTrailer[0].Peso_Trailer)
-                  console.log("vgm: ", vgm);
-                 
-                  
-                }else {
-                  const netoV = parseInt(buscarTrailer[0].Peso_Salida) - parseInt(buscarTrailer[0].Peso_Entrada)  - parseInt(buscarTrailer[0].Peso_Trailer)
-                  const vgm = netoV + parseInt(buscarTrailer[0].Peso_Trailer)
-                  console.log("vgm: ", vgm);
-                 
-
-                }
+// La carga y el VGM los calcula y persiste el backend
+                // (calculos/pesos.js). Antes se recalculaban aqui con una
+                // formula distinta a la de la reimpresion, y el mismo tiquete
+                // podia mostrar dos VGM diferentes.
+                setCarga(response[0]?.Neto ?? null)
+                setVgmD(response[0]?.Vgm ?? null)
               }
 
             } catch (error) {
@@ -154,25 +141,12 @@ const Modal = ({ Estado, Recibo, Recibo2, Peso, Estado2, volumenEstado, unidadEs
                 console.log("tara contenedor: ", parseInt(buscarTrailer[0].Peso_Trailer));
 
 
-                const cargaF2 = parseInt(buscarTrailer[0].Peso_Salida) - (parseInt(buscarTrailer[0].taraCab2) + parseInt(buscarTrailer[0].Peso_Trailer) + parseInt(buscarTrailer[0].Gross_Entrada))
-
-            // const cargaF  =  parseInt(response[0].Bruto) - parseInt(response[0].Tara) - parseInt(buscarTrailer[0].Peso_Trailer)
-            setCarga(cargaF2)
-
-            setVgmD(cargaF2 + parseInt(buscarTrailer[0].Gross_Entrada))
-            if(parseInt(buscarTrailer[0].Peso_Entrada) > parseInt(buscarTrailer[0].Peso_Salida)){
-              const netoV = parseInt(buscarTrailer[0].Peso_Entrada) - parseInt(buscarTrailer[0].Peso_Salida) - parseInt(buscarTrailer[0].Peso_Trailer)
-              console.log("netoV: ", netoV);
-
-              const vgm = netoV + parseInt(buscarTrailer[0].Peso_Trailer)
-              console.log("vgm: ", vgm);
-              
-            }else {
-              const netoV = parseInt(buscarTrailer[0].Peso_Salida) - parseInt(buscarTrailer[0].Peso_Entrada)  - parseInt(buscarTrailer[0].Peso_Trailer)
-              console.log("netoV: ", netoV);
-              const vgm = netoV + parseInt(buscarTrailer[0].Peso_Trailer)
-              console.log("vgm: ", vgm);
-            }
+// La carga y el VGM los calcula y persiste el backend
+                // (calculos/pesos.js). Antes se recalculaban aqui con una
+                // formula distinta a la de la reimpresion, y el mismo tiquete
+                // podia mostrar dos VGM diferentes.
+                setCarga(response[0]?.Neto ?? null)
+                setVgmD(response[0]?.Vgm ?? null)
             setTrailer(buscarTrailer[0])
           }
 
@@ -546,7 +520,7 @@ const Modal = ({ Estado, Recibo, Recibo2, Peso, Estado2, volumenEstado, unidadEs
                                                     PESO VGM:
                                                 </Text>
                                                 <Text style={{ fontSize: fontSize, maxWidth: maxWidth, fontWeight: fontWeight, marginLeft: "20.5%", letterSpacing: 1.5 }}>
-                                                    { trailer ? parseInt(trailer.Peso_Trailer) + parseInt(trailer.Gross_Entrada) :  "0 "}
+                                                    { Recibo?.Vgm ? Recibo.Vgm : "0 "}
                                                 </Text>
                                                 <Text style={{ marginBottom: '0%', fontSize: fontSize, maxWidth: maxWidth, fontWeight: fontWeight, marginLeft: "29%", letterSpacing: letterSpacing }}>
                                                     KG

@@ -66,24 +66,12 @@ const Modal = ({ datos, setDatos }) => {
             console.log("trailer: ", parseInt(buscarTrailer[0].Gross_Entrada));
             console.log("tara contenedor: ", parseInt(buscarTrailer[0].Peso_Trailer));
 
-            const cargaF2 = parseInt(buscarTrailer[0].Peso_Salida) - (parseInt(buscarTrailer[0].taraCab2) + parseInt(buscarTrailer[0].Peso_Trailer) + parseInt(buscarTrailer[0].Gross_Entrada))
-       
-        setCarga(cargaF2)
-
-        setVgmD(cargaF2 + parseInt(buscarTrailer[0].Gross_Entrada))
-        if(parseInt(buscarTrailer[0].Peso_Entrada) > parseInt(buscarTrailer[0].Peso_Salida)){
-          const netoV = parseInt(buscarTrailer[0].Peso_Entrada) - parseInt(buscarTrailer[0].Peso_Salida) - parseInt(buscarTrailer[0].Peso_Trailer)
-          console.log("netoV: ", netoV);
-
-          const vgm = netoV + parseInt(buscarTrailer[0].Peso_Trailer)
-          console.log("vgm: ", vgm);
-          
-        }else {
-          const netoV = parseInt(buscarTrailer[0].Peso_Salida) - parseInt(buscarTrailer[0].Peso_Entrada) -parseInt(buscarTrailer[0].Peso_Trailer)
-          console.log("netoV: ", netoV);
-          const vgm = netoV + parseInt(buscarTrailer[0].Peso_Trailer)
-          console.log("vgm: ", vgm);
-        }
+// La carga y el VGM los calcula y persiste el backend
+                // (calculos/pesos.js). Antes se recalculaban aqui con una
+                // formula distinta a la de la reimpresion, y el mismo tiquete
+                // podia mostrar dos VGM diferentes.
+                setCarga(datos?.Neto ?? null)
+                setVgmD(datos?.Vgm ?? null)
         setTrailer(buscarTrailer[0])
        }
       }
@@ -527,7 +515,7 @@ const Modal = ({ datos, setDatos }) => {
                                                     PESO VGM:
                                                 </Text>
                                                 <Text style={{ fontSize: fontSize, maxWidth: maxWidth, fontWeight: fontWeight, marginLeft: "20.5%", letterSpacing: 1.5 }}>
-                                                    {datos ? parseInt(datos.Tara_Contenedor) + parseInt(datos.Neto): "0 "}
+                                                    {datos?.Vgm ? datos.Vgm : "0 "}
                                                 </Text>
                                                 <Text style={{ marginBottom: '0%', fontSize: fontSize, maxWidth: maxWidth, fontWeight: fontWeight, marginLeft: "29%", letterSpacing: letterSpacing }}>
                                                     KG
