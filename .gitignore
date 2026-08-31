@@ -97,3 +97,7 @@ amplify/.config/local-*
 ehthumbs.db
 Thumbs.db
 desktop.ini
+build/
+build*/
+*.rar
+*.zip
