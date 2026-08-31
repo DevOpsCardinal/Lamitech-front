@@ -1,0 +1,9 @@
+table tr td.hidden,
+table tr th.hidden {
+  mso-style-parent: '';
+  mso-number-format: \@;
+  mso-hide: all;
+  font-size: 1px;
+  color: #ffffff;
+  line-height: 0;
+}
