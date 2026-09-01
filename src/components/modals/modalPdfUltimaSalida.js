@@ -97,7 +97,7 @@ const Modal = ({ pesoNumEnv, setPdf, checkDespacho, checkEntrada, placa }) => {
       setTrailer(buscarTrailer[0])
       // La carga y el VGM llegan calculados desde el backend
       // (calculos/pesos.js); antes se recalculaban aqui y no se mostraban.
-      setCarga(String(response[0]?.No_Contenedor ?? '').trim() ? (response[0]?.Neto ?? null) : null)
+      setCarga(response[0]?.Carga ?? null)
       setVgmD(response[0]?.Vgm ?? null)
     }
   }else {
@@ -112,7 +112,7 @@ const Modal = ({ pesoNumEnv, setPdf, checkDespacho, checkEntrada, placa }) => {
 
       // La carga y el VGM llegan calculados desde el backend
       // (calculos/pesos.js); antes se recalculaban aqui y no se mostraban.
-      setCarga(String(response[0]?.No_Contenedor ?? '').trim() ? (response[0]?.Neto ?? null) : null)
+      setCarga(response[0]?.Carga ?? null)
       setVgmD(response[0]?.Vgm ?? null)
     }
   }
@@ -263,7 +263,7 @@ const Modal = ({ pesoNumEnv, setPdf, checkDespacho, checkEntrada, placa }) => {
                                                     PESO VGM:
                                                 </Text>
                                                 <Text style={{ fontSize: fontSize, maxWidth: maxWidth, fontWeight: fontWeight, marginLeft: "20.5%", letterSpacing: 1.5 }}>
-                                                    {recibo?.Vgm ? recibo.Vgm : "0 "}
+                                                    {recibo?.Vgm ? recibo.Vgm : ''}
                                                 </Text>
                                                 <Text style={{ marginBottom: '0%', fontSize: fontSize, maxWidth: maxWidth, fontWeight: fontWeight, marginLeft: "29%", letterSpacing: letterSpacing }}>
                                                     KG

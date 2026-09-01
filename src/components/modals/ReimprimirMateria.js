@@ -89,7 +89,7 @@ const Modal = ({ datos, setDatos}) => {
                 // (calculos/pesos.js). Antes se recalculaban aqui con una
                 // formula distinta a la de la reimpresion, y el mismo tiquete
                 // podia mostrar dos VGM diferentes.
-                setCarga(String(datos?.No_Contenedor ?? '').trim() ? (datos?.Neto ?? null) : null)
+                setCarga(datos?.Carga ?? null)
                 setVgmD(datos?.Vgm ?? null)
         setTrailer(buscarTrailer[0])
        }
@@ -514,7 +514,7 @@ const Modal = ({ datos, setDatos}) => {
                                         VGM DEFINITIVO:
                                       </Text>
                                       <Text style={{ marginBottom: '0%', fontSize: fontSize, maxWidth: maxWidth, fontWeight: fontWeight, letterSpacing: letterSpacing,  marginLeft:68 }}>
-                                          {vgmD ? vgmD: "0 "}
+                                          {vgmD ? vgmD: ''}
                                       </Text>
                                     </View>
                                     <Text style={{ marginBottom: '1%', fontSize: fontSize, maxWidth: maxWidth, fontWeight: fontWeight, letterSpacing: letterSpacing, marginTop: '1%' }}>
@@ -591,7 +591,7 @@ const Modal = ({ datos, setDatos}) => {
                                                     PESO VGM:
                                                 </Text>
                                                 <Text style={{ fontSize: fontSize, maxWidth: maxWidth, fontWeight: fontWeight, marginLeft: "20.5%", letterSpacing: 1.5 }}>
-                                                    {datos?.Vgm ? datos.Vgm : "0 "}
+                                                    {datos?.Vgm ? datos.Vgm : ''}
                                                 </Text>
                                                 <Text style={{ marginBottom: '0%', fontSize: fontSize, maxWidth: maxWidth, fontWeight: fontWeight, marginLeft: "29%", letterSpacing: letterSpacing }}>
                                                     KG

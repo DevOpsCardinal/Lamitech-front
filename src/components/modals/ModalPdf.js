@@ -112,7 +112,7 @@ const Modal = ({ Estado, Recibo, Recibo2, Peso, Estado2, volumenEstado, unidadEs
                 // (calculos/pesos.js). Antes se recalculaban aqui con una
                 // formula distinta a la de la reimpresion, y el mismo tiquete
                 // podia mostrar dos VGM diferentes.
-                setCarga(String(response[0]?.No_Contenedor ?? '').trim() ? (response[0]?.Neto ?? null) : null)
+                setCarga(response[0]?.Carga ?? null)
                 setVgmD(response[0]?.Vgm ?? null)
               }
 
@@ -145,7 +145,7 @@ const Modal = ({ Estado, Recibo, Recibo2, Peso, Estado2, volumenEstado, unidadEs
                 // (calculos/pesos.js). Antes se recalculaban aqui con una
                 // formula distinta a la de la reimpresion, y el mismo tiquete
                 // podia mostrar dos VGM diferentes.
-                setCarga(String(response[0]?.No_Contenedor ?? '').trim() ? (response[0]?.Neto ?? null) : null)
+                setCarga(response[0]?.Carga ?? null)
                 setVgmD(response[0]?.Vgm ?? null)
             setTrailer(buscarTrailer[0])
           }
@@ -466,7 +466,7 @@ const Modal = ({ Estado, Recibo, Recibo2, Peso, Estado2, volumenEstado, unidadEs
                                                                            VGM DEFINITIVO:
                                                                          </Text>
                                                                          <Text style={{ marginBottom: '0%', fontSize: fontSize, maxWidth: maxWidth, fontWeight: fontWeight, letterSpacing: letterSpacing,  marginLeft:68 }}>
-                                                                             {vgmD ? vgmD: "0 "}
+                                                                             {vgmD ? vgmD: ''}
                                                                          </Text>
                                                                        </View>
 
@@ -525,7 +525,7 @@ const Modal = ({ Estado, Recibo, Recibo2, Peso, Estado2, volumenEstado, unidadEs
                                                     TARA CONTENEDOR:
                                                 </Text>
                                                 <Text style={{ fontSize: fontSize, maxWidth: maxWidth, fontWeight: fontWeight, marginLeft: "20.5%", letterSpacing: 1.5 }}>
-                                                    {trailer ? trailer.Gross_Entrada : recibo ? recibo.Tara_Contenedor: "0 "}
+                                                    {recibo?.Tara_Contenedor ? recibo.Tara_Contenedor : trailer ? trailer.Gross_Entrada : "0 "}
                                                 </Text>
                                                 <Text style={{ marginBottom: '0%', fontSize: fontSize, maxWidth: maxWidth, fontWeight: fontWeight, marginLeft: "29%", letterSpacing: letterSpacing }}>
                                                     KG
@@ -540,7 +540,7 @@ const Modal = ({ Estado, Recibo, Recibo2, Peso, Estado2, volumenEstado, unidadEs
                                                     PESO VGM:
                                                 </Text>
                                                 <Text style={{ fontSize: fontSize, maxWidth: maxWidth, fontWeight: fontWeight, marginLeft: "20.5%", letterSpacing: 1.5 }}>
-                                                    { Recibo?.Vgm ? Recibo.Vgm : "0 "}
+                                                    { vgmD ? vgmD : ''}
                                                 </Text>
                                                 <Text style={{ marginBottom: '0%', fontSize: fontSize, maxWidth: maxWidth, fontWeight: fontWeight, marginLeft: "29%", letterSpacing: letterSpacing }}>
                                                     KG
