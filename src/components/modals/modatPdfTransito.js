@@ -434,7 +434,7 @@ const Modal = ({ pesoNumEnv, setPdf, checkDespacho, checkEntrada, placa }) => {
                                                     PESO VGM:
                                                 </Text>
                                                 <Text style={{ fontSize: fontSize, maxWidth: maxWidth, fontWeight: fontWeight, marginLeft: "20.5%", letterSpacing: 1.5 }}>
-                                                    0
+                                                    {''}
                                                 </Text>
                                                 <Text style={{ marginBottom: '0%', fontSize: fontSize, maxWidth: maxWidth, fontWeight: fontWeight, marginLeft: "29%", letterSpacing: letterSpacing }}>
                                                     KG

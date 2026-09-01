@@ -50,6 +50,13 @@ const Modal = ({ datos, setDatos }) => {
 
 
     const buscarTrailerF = async () => {
+      // La carga y el VGM los calcula y persiste el backend (calculos/pesos.js);
+      // aqui solo se leen. Van FUERA del if del trailer: estaban dentro, y por
+      // eso un movimiento sin trailer nunca mostraba el VGM aunque estuviera
+      // calculado y guardado en la base.
+      setCarga(datos?.Carga ?? null)
+      setVgmD(datos?.Vgm ?? null)
+
       if(datos.Fecha_Entrada !== ""){
         const buscarTrailer = await getTrailer2(auth, datos.No_R, datos.Placa, datos.Fecha_Entrada, datos.Fecha_Peso_Vacio)
 
@@ -65,13 +72,6 @@ const Modal = ({ datos, setDatos }) => {
             console.log("tara: ", parseInt(datos.Tara));
             console.log("trailer: ", parseInt(buscarTrailer[0].Gross_Entrada));
             console.log("tara contenedor: ", parseInt(buscarTrailer[0].Peso_Trailer));
-
-// La carga y el VGM los calcula y persiste el backend
-                // (calculos/pesos.js). Antes se recalculaban aqui con una
-                // formula distinta a la de la reimpresion, y el mismo tiquete
-                // podia mostrar dos VGM diferentes.
-                setCarga(datos?.Carga ?? null)
-                setVgmD(datos?.Vgm ?? null)
         setTrailer(buscarTrailer[0])
        }
       }
@@ -426,7 +426,7 @@ const Modal = ({ datos, setDatos }) => {
                                         CARGA:
                                       </Text>
                                       <Text style={{ marginBottom: '1%', fontSize: fontSize, maxWidth: maxWidth, fontWeight: fontWeight, letterSpacing: letterSpacing, marginLeft:170 }}>
-                                        {carga ? carga: ''}
+                                        {carga === null || carga === undefined ? '' : carga}
                                       </Text>
                                     </View>
 

@@ -95,6 +95,12 @@ const Modal = ({ Estado, Recibo, Recibo2, Peso, Estado2, volumenEstado, unidadEs
                 
               
                 setRecibo(response[0]);
+                // La carga y el VGM los calcula y persiste el backend (calculos/pesos.js);
+                // aqui solo se leen. Van FUERA del if del trailer: estaban dentro, y por
+                // eso un movimiento sin trailer nunca mostraba el VGM aunque estuviera
+                // calculado y guardado en la base.
+                setCarga(response[0]?.Carga ?? null)
+                setVgmD(response[0]?.Vgm ?? null)
               if(response[0].Fecha_Entrada !== ""){
                 const buscarTrailer = await getTrailer(auth, response[0].No_R)
                 console.log("buscarTrailer: ", buscarTrailer);
@@ -107,14 +113,7 @@ const Modal = ({ Estado, Recibo, Recibo2, Peso, Estado2, volumenEstado, unidadEs
 
 
 
-                
-// La carga y el VGM los calcula y persiste el backend
-                // (calculos/pesos.js). Antes se recalculaban aqui con una
-                // formula distinta a la de la reimpresion, y el mismo tiquete
-                // podia mostrar dos VGM diferentes.
-                setCarga(response[0]?.Carga ?? null)
-                setVgmD(response[0]?.Vgm ?? null)
-              }
+                              }
 
             } catch (error) {
                 
@@ -127,6 +126,12 @@ const Modal = ({ Estado, Recibo, Recibo2, Peso, Estado2, volumenEstado, unidadEs
           const response = await getUltimoIngreso(auth);
           console.log("responseDespachos", response[0]);
           setRecibo(response[0]);
+          // La carga y el VGM los calcula y persiste el backend (calculos/pesos.js);
+          // aqui solo se leen. Van FUERA del if del trailer: estaban dentro, y por
+          // eso un movimiento sin trailer nunca mostraba el VGM aunque estuviera
+          // calculado y guardado en la base.
+          setCarga(response[0]?.Carga ?? null)
+          setVgmD(response[0]?.Vgm ?? null)
 
 
           try {
@@ -140,13 +145,6 @@ const Modal = ({ Estado, Recibo, Recibo2, Peso, Estado2, volumenEstado, unidadEs
                 console.log("trailer: ", parseInt(buscarTrailer[0].Gross_Entrada));
                 console.log("tara contenedor: ", parseInt(buscarTrailer[0].Peso_Trailer));
 
-
-// La carga y el VGM los calcula y persiste el backend
-                // (calculos/pesos.js). Antes se recalculaban aqui con una
-                // formula distinta a la de la reimpresion, y el mismo tiquete
-                // podia mostrar dos VGM diferentes.
-                setCarga(response[0]?.Carga ?? null)
-                setVgmD(response[0]?.Vgm ?? null)
             setTrailer(buscarTrailer[0])
           }
 
@@ -454,7 +452,7 @@ const Modal = ({ Estado, Recibo, Recibo2, Peso, Estado2, volumenEstado, unidadEs
                                                                            CARGA:
                                                                          </Text>
                                                                          <Text style={{ marginBottom: '1%', fontSize: fontSize, maxWidth: maxWidth, fontWeight: fontWeight, letterSpacing: letterSpacing, marginLeft:170 }}>
-                                                                           {carga ? carga: ''}
+                                                                           {carga === null || carga === undefined ? '' : carga}
                                                                          </Text>
                                                                        </View>
                                    
