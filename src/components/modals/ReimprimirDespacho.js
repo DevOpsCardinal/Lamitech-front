@@ -70,7 +70,7 @@ const Modal = ({ datos, setDatos }) => {
                 // (calculos/pesos.js). Antes se recalculaban aqui con una
                 // formula distinta a la de la reimpresion, y el mismo tiquete
                 // podia mostrar dos VGM diferentes.
-                setCarga(datos?.Neto ?? null)
+                setCarga(String(datos?.No_Contenedor ?? '').trim() ? (datos?.Neto ?? null) : null)
                 setVgmD(datos?.Vgm ?? null)
         setTrailer(buscarTrailer[0])
        }

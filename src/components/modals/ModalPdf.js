@@ -112,7 +112,7 @@ const Modal = ({ Estado, Recibo, Recibo2, Peso, Estado2, volumenEstado, unidadEs
                 // (calculos/pesos.js). Antes se recalculaban aqui con una
                 // formula distinta a la de la reimpresion, y el mismo tiquete
                 // podia mostrar dos VGM diferentes.
-                setCarga(response[0]?.Neto ?? null)
+                setCarga(String(response[0]?.No_Contenedor ?? '').trim() ? (response[0]?.Neto ?? null) : null)
                 setVgmD(response[0]?.Vgm ?? null)
               }
 
@@ -145,7 +145,7 @@ const Modal = ({ Estado, Recibo, Recibo2, Peso, Estado2, volumenEstado, unidadEs
                 // (calculos/pesos.js). Antes se recalculaban aqui con una
                 // formula distinta a la de la reimpresion, y el mismo tiquete
                 // podia mostrar dos VGM diferentes.
-                setCarga(response[0]?.Neto ?? null)
+                setCarga(String(response[0]?.No_Contenedor ?? '').trim() ? (response[0]?.Neto ?? null) : null)
                 setVgmD(response[0]?.Vgm ?? null)
             setTrailer(buscarTrailer[0])
           }
@@ -416,6 +416,26 @@ const Modal = ({ Estado, Recibo, Recibo2, Peso, Estado2, volumenEstado, unidadEs
                                      </Text>
                                      <Text style={{ marginBottom: '0%', fontSize: fontSize, maxWidth: maxWidth, fontWeight: fontWeight, letterSpacing: letterSpacing, marginLeft:76 }}>
                                        { trailer ? trailer.Peso_Entrada : ''}
+                                     </Text>
+                                   </View>
+
+
+                                   <View style={{flexDirection: 'row',}}>
+                                     <Text style={{ marginBottom: '0%', fontSize: fontSize, maxWidth: maxWidth, fontWeight: fontWeight, letterSpacing: letterSpacing }}>
+                                      PLACA SALIDA:
+                                     </Text>
+                                     <Text style={{ marginBottom: '0%', fontSize: fontSize, maxWidth: maxWidth, fontWeight: fontWeight, letterSpacing: letterSpacing, marginLeft:92 }}>
+                                       { trailer ? trailer.Placa_Salida : ''}
+                                     </Text>
+                                   </View>
+
+
+                                   <View style={{flexDirection: 'row',}}>
+                                     <Text style={{ marginBottom: '0%', fontSize: fontSize, maxWidth: maxWidth, fontWeight: fontWeight, letterSpacing: letterSpacing }}>
+                                      PESO SALIDA:
+                                     </Text>
+                                     <Text style={{ marginBottom: '0%', fontSize: fontSize, maxWidth: maxWidth, fontWeight: fontWeight, letterSpacing: letterSpacing, marginLeft:103 }}>
+                                       { trailer ? trailer.Peso_Salida : ''}
                                      </Text>
                                    </View>
 

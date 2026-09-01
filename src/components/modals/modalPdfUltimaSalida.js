@@ -97,7 +97,7 @@ const Modal = ({ pesoNumEnv, setPdf, checkDespacho, checkEntrada, placa }) => {
       setTrailer(buscarTrailer[0])
       // La carga y el VGM llegan calculados desde el backend
       // (calculos/pesos.js); antes se recalculaban aqui y no se mostraban.
-      setCarga(response[0]?.Neto ?? null)
+      setCarga(String(response[0]?.No_Contenedor ?? '').trim() ? (response[0]?.Neto ?? null) : null)
       setVgmD(response[0]?.Vgm ?? null)
     }
   }else {
@@ -112,7 +112,7 @@ const Modal = ({ pesoNumEnv, setPdf, checkDespacho, checkEntrada, placa }) => {
 
       // La carga y el VGM llegan calculados desde el backend
       // (calculos/pesos.js); antes se recalculaban aqui y no se mostraban.
-      setCarga(response[0]?.Neto ?? null)
+      setCarga(String(response[0]?.No_Contenedor ?? '').trim() ? (response[0]?.Neto ?? null) : null)
       setVgmD(response[0]?.Vgm ?? null)
     }
   }
